@@ -1,15 +1,14 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {Provider} from 'react-redux';
+import store from './src/store';
+import {TodoScreen} from './src/screens/TodoScreen';
 
-const App: () => React$Node = () => {
-  return <View />;
+const App = () => {
+  return (
+    <Provider store={store}>
+      <TodoScreen />
+    </Provider>
+  );
 };
 
 export default App;
