@@ -1,13 +1,28 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  input: {
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 5,
+  },
   todoList: {
     marginLeft: 10,
   },
   item: {
-    // backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 30,
+  },
+  text: {
+    fontSize: 20,
   },
   title: {
-    // color: 'green',
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  addButton: {
+    color: 'green',
   },
 });

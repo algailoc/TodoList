@@ -8,5 +8,9 @@ export function addTodo(value) {
   return action;
 }
 export function removeTodo(id) {
-  // type: REMOVE_TODO, id;
+  const action = {
+    type: REMOVE_TODO,
+    payload: id,
+  };
+  return action;
 }
