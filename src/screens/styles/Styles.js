@@ -1,13 +1,14 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  mainView: {},
   input: {
     borderColor: 'black',
     borderWidth: 1,
     margin: 5,
   },
   todoList: {
-    marginLeft: 10,
+    height: '80%',
   },
   item: {
     flexDirection: 'row',
@@ -21,8 +22,23 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
+    marginVertical: 5,
+  },
+  titleView: {
+    marginBottom: 30,
+    borderBottomWidth: 3,
+    borderBottomColor: '#8BE0BF',
+    borderRadius: 10,
   },
   addButton: {
-    color: 'green',
+    color: '#3DCD52',
+    alignSelf: 'center',
+  },
+  positive: {
+    marginHorizontal: '38%',
+  },
+  dialogue: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
   },
 });

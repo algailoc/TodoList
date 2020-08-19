@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View, FlatList, Text, TextInput, Alert} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {addTodo, removeTodo} from '../store/Action';
+import {removeTodo} from '../store/Action';
+import {NewTodoDialogue} from './NewTodo';
 
 export const TodoList = ({styles}) => {
   const Item = ({title, id}) => (
@@ -11,7 +12,7 @@ export const TodoList = ({styles}) => {
       <Icon
         name="delete-outline"
         size={30}
-        color={'red'}
+        color={'#CA5931'}
         onPress={() => deleteHandler(id)}
       />
     </View>
@@ -21,15 +22,14 @@ export const TodoList = ({styles}) => {
 
   const todoList = useSelector((state) => state.todo.todos);
 
-  const [value, setValue] = useState('');
+  const [visible, setVisible] = useState(false);
 
   const buttonHandler = () => {
-    if (value.trim().length > 0) {
-      dispatch(addTodo(value));
-      setValue('');
-    } else {
-      alert('No todo name');
-    }
+    setVisible(true);
+  };
+
+  const closeDialog = () => {
+    setVisible(false);
   };
 
   const deleteHandler = (id) => {
@@ -37,18 +37,19 @@ export const TodoList = ({styles}) => {
   };
 
   return (
-    <View>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => setValue(text)}
-        value={value}
-      />
+    <View style={styles.mainView}>
       <FlatList
+        style={styles.todoList}
         data={todoList}
         renderItem={({item}) => <Item title={item.value} id={item.id} />}
         keyExtractor={(item) => {
           return item.id;
         }}
+      />
+      <NewTodoDialogue
+        visible={visible}
+        closeDialog={closeDialog}
+        styles={styles}
       />
       <Icon
         name="tooltip-plus-outline"
