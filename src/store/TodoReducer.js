@@ -1,4 +1,4 @@
-import {ADD_TODO, REMOVE_TODO} from './types/types';
+import {ADD_TODO, REMOVE_TODO, REDACT_TODO} from './types/types';
 
 export const initialState = {
   todos: [
@@ -29,6 +29,17 @@ export const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
+    }
+
+    case REDACT_TODO: {
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload.id) {
+            todo.value = action.payload.value;
+          }
+        }),
       };
     }
 
