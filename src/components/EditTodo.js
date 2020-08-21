@@ -1,26 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, TextInput} from 'react-native';
 import {ConfirmDialog} from 'react-native-simple-dialogs';
-import {useDispatch, useSelector} from 'react-redux';
-import {redactTodo} from '../store/Action';
+import {useDispatch} from 'react-redux';
+import {editTodo} from '../store/Action';
 
-export const RedactTodoDialogue = ({visible, closeDialog, styles, id}) => {
-  const [value, setValue] = useState(value);
+export const EditTodoDialogue = ({visible, closeDialog, styles, id, title}) => {
+  console.log(id, title);
 
-  const todos = useSelector((state) => state.todo.todos);
+  const [value, setValue] = useState('');
 
-  const todo = todos.find((t) => t.id === id);
-
-  // const todoValue = () => {
-  //   const todo = todos.find((t) => t.id === id);
-  //   return todo.value;
-  // };
+  useEffect(() => {
+    setValue(title);
+  }, [title]);
 
   const dispatch = useDispatch();
 
   const positiveHandler = () => {
+    // console.log(id, value);
     if (value.trim().length > 0) {
-      dispatch(redactTodo(id, value));
+      dispatch(editTodo(id, value));
       closeDialog();
     } else {
       alert('No todo name');

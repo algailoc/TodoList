@@ -1,30 +1,13 @@
-import React, {useState} from 'react';
-import {View, FlatList, Text, Alert, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, FlatList, Alert, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {removeTodo} from '../store/Action';
+import {removeTodo, readTodo} from '../store/Action';
 import {NewTodoDialogue} from './NewTodo';
-import {RedactTodoDialogue} from './RedactTodo';
+import {EditTodoDialogue} from './EditTodo';
+import {Item} from './Item';
 
 export const TodoList = ({styles}) => {
-  const Item = ({title, id}) => (
-    <TouchableOpacity
-      onPress={() => {
-        redactTodoHandler();
-        getId(id);
-      }}>
-      <View style={styles.item}>
-        <Text style={styles.text}>{title}</Text>
-        <Icon
-          name="delete-outline"
-          size={30}
-          color={'#CA5931'}
-          onPress={() => deleteHandler(id)}
-        />
-      </View>
-    </TouchableOpacity>
-  );
-
   const dispatch = useDispatch();
 
   const todoList = useSelector((state) => state.todo.todos);
@@ -32,6 +15,15 @@ export const TodoList = ({styles}) => {
   const [visible, setVisible] = useState(false);
 
   const [visibleRedact, setVisibleRedact] = useState(false);
+
+  const [redactId, setRedactId] = useState('');
+  const [redactTitle, setRedactTitle] = useState('');
+
+  const arr = [];
+
+  useEffect(() => {
+    dispatch(readTodo(arr));
+  });
 
   const buttonHandler = () => {
     setVisible(true);
@@ -57,18 +49,10 @@ export const TodoList = ({styles}) => {
     );
   };
 
-  const redactTodoHandler = (id) => {
+  const redactTodoHandler = (id, value) => {
     setVisibleRedact(true);
-  };
-
-  // const getTodoValue = (id) => {
-  //   const todo = todoList.find((t) => t.id === id);
-  //   return todo;
-  // };
-
-  const getId = (id) => {
-    console.log(id);
-    return id;
+    setRedactId(id);
+    setRedactTitle(value);
   };
 
   return (
@@ -76,7 +60,19 @@ export const TodoList = ({styles}) => {
       <FlatList
         style={styles.todoList}
         data={todoList}
-        renderItem={({item}) => <Item title={item.value} id={item.id} />}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            onPress={() => {
+              redactTodoHandler(item.id, item.value);
+            }}>
+            <Item
+              styles={styles}
+              title={item.value}
+              id={item.id}
+              deleteHandler={deleteHandler}
+            />
+          </TouchableOpacity>
+        )}
         keyExtractor={(item) => {
           return item.id;
         }}
@@ -86,11 +82,12 @@ export const TodoList = ({styles}) => {
         closeDialog={closeDialog}
         styles={styles}
       />
-      <RedactTodoDialogue
+      <EditTodoDialogue
         visible={visibleRedact}
         closeDialog={closeDialog}
         styles={styles}
-        id={getId}
+        id={redactId}
+        title={redactTitle}
       />
       <Icon
         name="tooltip-plus-outline"

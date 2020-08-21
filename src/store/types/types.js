@@ -1,3 +1,17 @@
+export const READ_TODO = 'READ_TODO';
+
 export const ADD_TODO = 'ADD_TODO';
+export const ADD_TODO_BEGIN = 'ADD_TODO_BEGIN';
+export const ADD_TODO_FINISHED = 'ADD_TODO_FINISHED';
+export const ADD_TODO_ERROR = 'ADD_TODO_ERROR';
+
 export const REMOVE_TODO = 'REMOVE_TODO';
-export const REDACT_TODO = 'REDACT_TODO';
+export const REMOVE_TODO_BEGIN = 'REMOVE_TODO_BEGIN';
+export const REMOVE_TODO_FINISHED = 'REMOVE_TODO_FINISHED';
+export const REMOVE_TODO_ERROR = 'REMOVE_TODO_ERROR';
+
+export const EDIT_TODO = 'EDIT_TODO';
+export const EDIT_TODO_BEGIN = 'EDIT_TODO_BEGIN';
+export const EDIT_TODO_FINISHED = 'EDIT_TODO_FINISHED';
+export const EDIT_TODO_ERROR = 'EDIT_TODO_ERROR';
+

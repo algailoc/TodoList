@@ -32,6 +32,7 @@ export const NewTodoDialogue = ({visible, closeDialog, styles}) => {
       }}>
       <View>
         <TextInput
+          autoFocus={true}
           style={styles.input}
           onChangeText={(text) => setValue(text)}
           value={value}
