@@ -41,4 +41,9 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
   },
+  loader: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    height: '80%',
+  },
 });

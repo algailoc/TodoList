@@ -1,4 +1,7 @@
 export const READ_TODO = 'READ_TODO';
+export const READ_TODO_BEGIN = 'READ_TODO_BEGIN';
+export const READ_TODO_FINISHED = 'READ_TODO_FINISHED';
+export const READ_TODO_ERROR = 'READ_TODO_ERROR';
 
 export const ADD_TODO = 'ADD_TODO';
 export const ADD_TODO_BEGIN = 'ADD_TODO_BEGIN';

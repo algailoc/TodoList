@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {editTodo} from '../store/Action';
 
 export const EditTodoDialogue = ({visible, closeDialog, styles, id, title}) => {
-  console.log(id, title);
+  // console.log(id, title);
 
   const [value, setValue] = useState('');
 

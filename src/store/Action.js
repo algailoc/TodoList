@@ -12,12 +12,39 @@ import {
   EDIT_TODO_ERROR,
   EDIT_TODO_FINISHED,
   READ_TODO,
+  READ_TODO_BEGIN,
+  READ_TODO_ERROR,
+  READ_TODO_FINISHED,
 } from './types/types';
 
-export function readTodo(arr) {
+export function readTodo(data) {
   const action = {
     type: READ_TODO,
-    payload: arr,
+    payload: data,
+  };
+  return action;
+}
+
+export function readTodoBegin(data) {
+  const action = {
+    type: READ_TODO_BEGIN,
+    payload: data,
+  };
+  return action;
+}
+
+export function readTodoFinished(data) {
+  const action = {
+    type: READ_TODO_FINISHED,
+    payload: data,
+  };
+  return action;
+}
+
+export function readTodoError(data) {
+  const action = {
+    type: READ_TODO_ERROR,
+    payload: data,
   };
   return action;
 }

@@ -1,21 +1,22 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import {TodoList} from '../components/TodoList';
 
 class AsyncStorageService {
   static key = 'TodoKey';
 
-  static async readData(arr) {
+  static async readData() {
     let todoList = [];
 
     try {
       const jsonValue = await AsyncStorage.getItem(AsyncStorageService.key);
       if (jsonValue !== null) {
-        arr = JSON.parse(jsonValue);
+        todoList = JSON.parse(jsonValue);
+      } else {
+        console.log('Array is empty');
       }
     } catch (e) {
       console.log('In read data on getting');
     }
-    return arr;
+    return todoList;
   }
 
   static async writeData(value) {
@@ -41,7 +42,7 @@ class AsyncStorageService {
     } catch (e) {
       console.log('In write data on setting');
     }
-    console.log(todoList);
+    // console.log(todoList);
     return todo;
   }
 
@@ -71,7 +72,7 @@ class AsyncStorageService {
     } catch (e) {
       console.log('In delete data on setting');
     }
-    console.log(todoList);
+    // console.log(todoList);
 
     return id;
   }

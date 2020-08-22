@@ -19,11 +19,9 @@ export const TodoList = ({styles}) => {
   const [redactId, setRedactId] = useState('');
   const [redactTitle, setRedactTitle] = useState('');
 
-  const arr = [];
-
-  useEffect(() => {
-    dispatch(readTodo(arr));
-  });
+  // useEffect(() => {
+  //   dispatch(readTodo());
+  // }, [dispatch]);
 
   const buttonHandler = () => {
     setVisible(true);

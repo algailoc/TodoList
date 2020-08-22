@@ -9,30 +9,39 @@ import {
   ADD_TODO_BEGIN,
   ADD_TODO_FINISHED,
   ADD_TODO_ERROR,
-  READ_TODO,
+  READ_TODO_BEGIN,
+  READ_TODO_FINISHED,
+  READ_TODO_ERROR,
 } from './types/types';
 
 export const initialState = {
-  todos: [
-    {
-      id: '1',
-      value: 'Write the app',
-    },
-  ],
+  ready: false,
+  todos: [],
 };
 
 export const todoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case READ_TODO: {
-      // return {
-      //   ...state,
-      //   todos: action.payload,
-      // };
+    case READ_TODO_BEGIN: {
+      return {
+        ...state,
+        ready: false,
+      };
+    }
+
+    case READ_TODO_FINISHED: {
+      return {
+        ...state,
+        todos: action.payload,
+        ready: true,
+      };
+    }
+
+    case READ_TODO_ERROR: {
+      console.log('Reducer error on reading');
       return state;
     }
 
     case ADD_TODO_BEGIN: {
-      console.log('Add todo begin');
       return state;
     }
 
@@ -59,7 +68,7 @@ export const todoReducer = (state = initialState, action) => {
     }
 
     case REMOVE_TODO_FINISHED: {
-      console.log('Remove finished');
+      // console.log('Remove finished');
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
