@@ -5,7 +5,6 @@ import {
   EDIT_TODO_BEGIN,
   EDIT_TODO_FINISHED,
   EDIT_TODO_ERROR,
-  EDIT_TODO,
   ADD_TODO_BEGIN,
   ADD_TODO_FINISHED,
   ADD_TODO_ERROR,
@@ -68,7 +67,6 @@ export const todoReducer = (state = initialState, action) => {
     }
 
     case REMOVE_TODO_FINISHED: {
-      // console.log('Remove finished');
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
@@ -80,7 +78,11 @@ export const todoReducer = (state = initialState, action) => {
       return state;
     }
 
-    case EDIT_TODO: {
+    case EDIT_TODO_BEGIN: {
+      return state;
+    }
+
+    case EDIT_TODO_FINISHED: {
       return {
         ...state,
         todos: state.todos.map((todo) => {
@@ -90,6 +92,11 @@ export const todoReducer = (state = initialState, action) => {
           return todo;
         }),
       };
+    }
+
+    case EDIT_TODO_ERROR: {
+      console.log('Reducer error on editing');
+      return state;
     }
 
     default: {

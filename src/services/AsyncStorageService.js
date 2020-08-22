@@ -58,12 +58,6 @@ class AsyncStorageService {
       console.log('In delete data on getting');
     }
 
-    try {
-      await AsyncStorage.removeItem(AsyncStorageService.key);
-    } catch (e) {
-      console.log('In delete on removing');
-    }
-
     todoList = todoList.filter((todo) => todo.id !== id);
 
     try {
@@ -77,7 +71,34 @@ class AsyncStorageService {
     return id;
   }
 
-  static async editData() {}
+  static async editData({id, value}) {
+    let todoList = [];
+
+    try {
+      const jsonValue = await AsyncStorage.getItem(AsyncStorageService.key);
+      if (jsonValue !== null) {
+        todoList = JSON.parse(jsonValue);
+      }
+    } catch (e) {
+      console.log('In edit data on getting');
+    }
+
+    todoList = todoList.map((todo) => {
+      if (todo.id === id) {
+        todo.value = value;
+      }
+      return todo;
+    });
+
+    try {
+      const jsonValue = JSON.stringify(todoList);
+      await AsyncStorage.setItem(AsyncStorageService.key, jsonValue);
+    } catch (e) {
+      console.log('In edit data on setting');
+    }
+    console.log(todoList);
+    return {id, value};
+  }
 }
 
 export default AsyncStorageService;
