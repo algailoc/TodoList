@@ -5,7 +5,9 @@ export const styles = StyleSheet.create({
   input: {
     borderColor: 'black',
     borderWidth: 1,
+    borderRadius: 5,
     margin: 5,
+    fontSize: 20,
   },
   todoList: {
     height: '80%',
@@ -13,7 +15,9 @@ export const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 30,
+    marginHorizontal: 25,
+    marginBottom: 10,
+    height: 27,
   },
   text: {
     fontSize: 20,

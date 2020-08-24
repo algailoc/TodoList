@@ -9,7 +9,7 @@ function* addTodoHandler(action) {
 
   try {
     const data = yield call(AsyncStorageService.writeData, action.payload);
-    yield put(addTodoFinished(data.id, data.value));
+    yield put(addTodoFinished(data.id, data.value, data.isBusy));
   } catch (e) {
     yield put(addTodoError());
   }

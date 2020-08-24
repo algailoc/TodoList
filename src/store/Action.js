@@ -65,10 +65,10 @@ export function addTodoBegin() {
   return action;
 }
 
-export function addTodoFinished(id, value) {
+export function addTodoFinished(id, value, isBusy) {
   const action = {
     type: ADD_TODO_FINISHED,
-    payload: {id, value},
+    payload: {id, value, isBusy},
   };
   return action;
 }
@@ -89,10 +89,10 @@ export function removeTodo(id) {
   return action;
 }
 
-export function removeTodoBegin() {
+export function removeTodoBegin(id) {
   const action = {
     type: REMOVE_TODO_BEGIN,
-    payload: undefined,
+    payload: id,
   };
   return action;
 }
@@ -105,10 +105,10 @@ export function removeTodoFinished(id) {
   return action;
 }
 
-export function removeTodoError() {
+export function removeTodoError(id) {
   const action = {
     type: REMOVE_TODO_ERROR,
-    payload: undefined,
+    payload: id,
   };
   return action;
 }
@@ -121,10 +121,10 @@ export function editTodo(id, value) {
   return action;
 }
 
-export function editTodoBegin() {
+export function editTodoBegin(id) {
   const action = {
     type: EDIT_TODO_BEGIN,
-    payload: undefined,
+    payload: id,
   };
   return action;
 }
@@ -137,10 +137,10 @@ export function editTodoFinished(id, value) {
   return action;
 }
 
-export function editTodoError() {
+export function editTodoError(id) {
   const action = {
     type: EDIT_TODO_ERROR,
-    payload: undefined,
+    payload: id,
   };
   return action;
 }

@@ -21,7 +21,8 @@ class AsyncStorageService {
 
   static async writeData(value) {
     const id = Date.now().toString();
-    const todo = {id, value};
+    const isBusy = false;
+    const todo = {id, value, isBusy};
 
     let todoList = [];
 

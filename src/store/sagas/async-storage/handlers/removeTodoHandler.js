@@ -9,13 +9,13 @@ import AsyncStorageService from '../../../../services/AsyncStorageService';
 function* removeTodoHandler(action) {
   console.log('From saga', action);
 
-  yield put(removeTodoBegin());
+  yield put(removeTodoBegin(action.payload));
 
   try {
     const data = yield call(AsyncStorageService.deleteData, action.payload);
     yield put(removeTodoFinished(data));
   } catch (e) {
-    yield put(removeTodoError());
+    yield put(removeTodoError(action.payload));
   }
 }
 

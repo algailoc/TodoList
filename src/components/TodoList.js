@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, FlatList, Alert, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {removeTodo, readTodo} from '../store/Action';
+import {removeTodo} from '../store/Action';
 import {NewTodoDialogue} from './NewTodo';
 import {EditTodoDialogue} from './EditTodo';
 import {Item} from './Item';
@@ -14,14 +14,10 @@ export const TodoList = ({styles}) => {
 
   const [visible, setVisible] = useState(false);
 
-  const [visibleRedact, setVisibleRedact] = useState(false);
+  const [visibleRedact, setVisibleEdit] = useState(false);
 
-  const [redactId, setRedactId] = useState('');
-  const [redactTitle, setRedactTitle] = useState('');
-
-  // useEffect(() => {
-  //   dispatch(readTodo());
-  // }, [dispatch]);
+  const [editId, setEditId] = useState('');
+  const [editTitle, setEditTitle] = useState('');
 
   const buttonHandler = () => {
     setVisible(true);
@@ -29,7 +25,7 @@ export const TodoList = ({styles}) => {
 
   const closeDialog = () => {
     setVisible(false);
-    setVisibleRedact(false);
+    setVisibleEdit(false);
   };
 
   const deleteHandler = (id) => {
@@ -48,9 +44,9 @@ export const TodoList = ({styles}) => {
   };
 
   const redactTodoHandler = (id, value) => {
-    setVisibleRedact(true);
-    setRedactId(id);
-    setRedactTitle(value);
+    setVisibleEdit(true);
+    setEditId(id);
+    setEditTitle(value);
   };
 
   return (
@@ -68,6 +64,7 @@ export const TodoList = ({styles}) => {
               title={item.value}
               id={item.id}
               deleteHandler={deleteHandler}
+              isBusy={todoList.isBusy}
             />
           </TouchableOpacity>
         )}
@@ -84,8 +81,8 @@ export const TodoList = ({styles}) => {
         visible={visibleRedact}
         closeDialog={closeDialog}
         styles={styles}
-        id={redactId}
-        title={redactTitle}
+        id={editId}
+        title={editTitle}
       />
       <Icon
         name="tooltip-plus-outline"

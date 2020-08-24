@@ -31,6 +31,7 @@ export const EditTodoDialogue = ({visible, closeDialog, styles, id, title}) => {
       title="Insert new todo name"
       onTouchOutside={closeDialog}
       titleStyle={styles.dialogue}
+      keyboardShouldPersistTaps="always"
       positiveButton={{
         title: 'CONFIRM',
         onPress: positiveHandler,
@@ -39,6 +40,7 @@ export const EditTodoDialogue = ({visible, closeDialog, styles, id, title}) => {
       <View>
         <TextInput
           style={styles.input}
+          maxLength={25}
           onChangeText={(t) => setValue(t)}
           value={value}
         />

@@ -52,6 +52,7 @@ export const todoReducer = (state = initialState, action) => {
           {
             id: action.payload.id,
             value: action.payload.value,
+            isBusy: action.payload.isBusy,
           },
         ],
       };
@@ -63,7 +64,15 @@ export const todoReducer = (state = initialState, action) => {
     }
 
     case REMOVE_TODO_BEGIN: {
-      return state;
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload) {
+            todo.isBusy = true;
+          }
+          return todo;
+        }),
+      };
     }
 
     case REMOVE_TODO_FINISHED: {
@@ -75,11 +84,27 @@ export const todoReducer = (state = initialState, action) => {
 
     case REMOVE_TODO_ERROR: {
       console.log('Reducer error on deleting');
-      return state;
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload) {
+            todo.isBusy = false;
+          }
+          return todo;
+        }),
+      };
     }
 
     case EDIT_TODO_BEGIN: {
-      return state;
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload) {
+            todo.isBusy = true;
+          }
+          return todo;
+        }),
+      };
     }
 
     case EDIT_TODO_FINISHED: {
@@ -88,6 +113,7 @@ export const todoReducer = (state = initialState, action) => {
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload.id) {
             todo.value = action.payload.value;
+            todo.isBusy = false;
           }
           return todo;
         }),
@@ -96,7 +122,15 @@ export const todoReducer = (state = initialState, action) => {
 
     case EDIT_TODO_ERROR: {
       console.log('Reducer error on editing');
-      return state;
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload) {
+            todo.isBusy = false;
+          }
+          return todo;
+        }),
+      };
     }
 
     default: {
